@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Material Motion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav class="topnav">
+  <a href="#home" class="brand">Your Name</a>
+  <div class="nav-links">
+    <a href="#home" data-section="home" class="active">HOME</a>
+    <a href="#works" data-section="works">WORKS</a>
+    <a href="#profile" data-section="profile">PROFILE</a>
+    <a href="#contact" data-section="contact">CONTACT</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ══════ HOME ══════ -->
+  <section id="home" class="section hero">
+    <div class="hero-stage-wrap">
+      <svg id="stage" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid meet"
+           xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <!--
+          このd属性は初期値(フォールバック)。実際にはmain.js側のHERO_PATHS配列から
+          ページ読み込みごとにランダムで1つ選ばれ、ここに上書きされる。
+          パターンを増やしたり差し替えたりしたい場合はmain.jsのHERO_PATHS配列を編集する。
+          animateMotionはmpathでこのpathを参照しているので、d属性さえ変われば動きも見た目も自動で連動する。
+        -->
+        <path id="bakedPath" d="M 20,210 C 90,50 160,50 200,150 S 340,240 380,110" />
+        <g id="interactive-wrapper">
+          <g id="mover">
+            <circle r="7">
+              <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#bakedPath" xlink:href="#bakedPath"></mpath>
+              </animateMotion>
+            </circle>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-copy">
+      <p class="eyebrow">01 — HOME</p>
+      <h1>Web上で息づく、<br>プロシージャルモーション。</h1>
+      <p class="lead">Houdiniで設計した動きを、そのままブラウザへ。<br>カーソルを近づけると、軌跡が少しだけ表情を変えます。</p>
+    </div>
+
+    <div class="scroll-cue">
+      <span>SCROLL</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- ══════ WORKS ══════ -->
+  <section id="works" class="section">
+    <p class="eyebrow">02 — WORKS</p>
+    <h2>WORKS</h2>
+
+    <div class="works-grid">
+
+      <article class="work-card">
+        <div class="thumb" aria-hidden="true">
+          <canvas class="thumb-image"></canvas>
+          <canvas class="thumb-mask"></canvas>
+        </div>
+        <div class="card-meta">01 — 2025</div>
+        <h3>Fluid Signage System</h3>
+        <p>流体シミュレーションを基にした、館内サイネージ向けのモーションシステム。</p>
+        <span class="tag">Houdini / TouchDesigner</span>
+      </article>
+
+      <article class="work-card">
+        <div class="thumb" aria-hidden="true">
+          <canvas class="thumb-image"></canvas>
+          <canvas class="thumb-mask"></canvas>
+        </div>
+        <div class="card-meta">02 — 2025</div>
+        <h3>Kinetic Type Study</h3>
+        <p>パスに沿って崩れる可変フォントの実験。ブラウザ上でリアルタイムに再構成。</p>
+        <span class="tag">SVG / GSAP</span>
+      </article>
+
+      <article class="work-card">
+        <div class="thumb" aria-hidden="true">
+          <canvas class="thumb-image"></canvas>
+          <canvas class="thumb-mask"></canvas>
+        </div>
+        <div class="card-meta">03 — 2024</div>
+        <h3>Procedural Wayfinding</h3>
+        <p>プロシージャルに生成された導線パターンを空間演出へ応用したプロジェクト。</p>
+        <span class="tag">Houdini / Unreal</span>
+      </article>
+
+      <article class="work-card">
+        <div class="thumb" aria-hidden="true">
+          <canvas class="thumb-image"></canvas>
+          <canvas class="thumb-mask"></canvas>
+        </div>
+        <div class="card-meta">04 — 2024</div>
+        <h3>Generative Poster Series</h3>
+        <p>コードで生成した軌跡をリソグラフ印刷に落とし込んだポスターシリーズ。</p>
+        <span class="tag">Processing / Python</span>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══════ PROFILE ══════ -->
+  <section id="profile" class="section">
+    <p class="eyebrow">03 — PROFILE</p>
+    <h2>PROFILE</h2>
+
+    <div class="profile-grid">
+      <div class="profile-visual">
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <filter id="woodGrain" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="4" seed="11" result="noise"/>
+            <feColorMatrix in="noise" type="matrix"
+              values="0 0 0 0 0.74
+                      0 0 0 0 0.49
+                      0 0 0 0 0.29
+                      0 0 0 0.9 0"/>
+          </filter>
+          <rect width="220" height="220" fill="var(--panel)"/>
+          <rect width="220" height="220" filter="url(#woodGrain)"/>
+        </svg>
+      </div>
+
+      <div class="profile-copy">
+        <p class="lead">
+          プロシージャル技術と身体的な動きの間を行き来しながら、空間・映像・Webに一貫したモーションを設計しています。
+          Houdini上での検証を、そのままブラウザやインスタレーションへと接続することを得意としています。
+        </p>
+        <div class="skills">
+          <span class="skill-pill">Houdini</span>
+          <span class="skill-pill">TouchDesigner</span>
+          <span class="skill-pill">WebGL / Three.js</span>
+          <span class="skill-pill">GSAP</span>
+          <span class="skill-pill">SVG</span>
+          <span class="skill-pill">Python</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ CONTACT ══════ -->
+  <section id="contact" class="section">
+    <p class="eyebrow">04 — CONTACT</p>
+    <h2>CONTACT</h2>
+    <p class="lead">お仕事のご相談、ご質問などお気軽にご連絡ください。</p>
+
+    <a class="email-cta" href="mailto:hello@example.com">hello@example.com</a>
+
+    <div class="social-links">
+      <a href="#">→ Instagram</a>
+      <a href="#">→ X (Twitter)</a>
+      <a href="#">→ GitHub</a>
+      <a href="#">→ Vimeo</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Your Name</span>
+  <span>© 2026 Your Name. All rights reserved.</span>
+</footer>
+
+<div class="hud" id="hud">01/04 — home</div>
+
+<div class="cursor-badge" id="cursorBadge" aria-hidden="true">Click</div>
+
+<!-- ══════ LIGHTBOX (WORKS拡大表示) ══════ -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-backdrop" data-close></div>
+  <div class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+    <button class="lightbox-close" type="button" aria-label="閉じる" data-close>&times;</button>
+    <div class="lightbox-visual">
+      <canvas id="lightboxCanvas"></canvas>
+    </div>
+    <div class="lightbox-body">
+      <p class="card-meta" id="lightboxMeta"></p>
+      <h3 id="lightboxTitle"></h3>
+      <p class="lead" id="lightboxDesc"></p>
+      <span class="tag" id="lightboxTag"></span>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
+
+</body>
+</html>
