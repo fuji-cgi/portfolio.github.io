@@ -1,32 +1,5 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ── レイアウトを背景のドットグリッドに揃える ──
-     position:fixedの要素(ヘッダー・HUD・ライトボックス・カーソルラベルなど)は対象外。
-     それ以外の通常の流し込みレイアウトは、コンテンツの幅と左右の余白を
-     --dot-spacingの倍数にスナップさせることで、格子に揃って見えるようにする。
-     margin:0 autoによる中央寄せは画面幅に応じて半端な位置になるため、
-     ここでJSが計算した値をCSS変数として上書きし、.sectionなどがそれを参照する。 */
-  (function snapLayoutToGrid() {
-    const root = document.documentElement;
-    const SPACING = parseFloat(getComputedStyle(root).getPropertyValue('--dot-spacing')) || 22;
-    const MAX_CONTENT = 980; // これまでのmax-widthに相当する上限の目安
-    const MIN_MARGIN = 22;   // 画面端に最低限確保したい余白の目安
-
-    function apply() {
-      const vw = window.innerWidth;
-      const available = Math.max(SPACING, Math.min(MAX_CONTENT, vw - MIN_MARGIN * 2));
-      const width = Math.max(SPACING, Math.floor(available / SPACING) * SPACING);
-      const rawOffset = Math.max(0, (vw - width) / 2);
-      const offset = Math.floor(rawOffset / SPACING) * SPACING;
-
-      root.style.setProperty('--grid-content-width', `${width}px`);
-      root.style.setProperty('--grid-content-offset', `${offset}px`);
-    }
-
-    apply();
-    window.addEventListener('resize', apply);
-  })();
-
   /* ── WORKS用アートワーク生成（サムネイルとライトボックスで共有） ──
      今は実写真の代わりに、木目・石目を模したプロシージャルなアートワークを使っている。
      本物の写真に差し替えるときはdrawWorkArt()の中身を
@@ -540,7 +513,9 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
       elMeta.textContent = card.querySelector('.card-meta')?.textContent || '';
       elTitle.textContent = card.querySelector('h3')?.textContent || '';
-      elDesc.textContent = card.querySelector('p')?.textContent || '';
+      const descText = card.querySelector('p')?.textContent || '';
+      elDesc.textContent = descText;
+      elDesc.style.display = descText ? '' : 'none';
       elTag.textContent = card.querySelector('.tag')?.textContent || '';
 
       lightbox.classList.add('open');
